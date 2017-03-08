@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Gantt.Web.Models.ViewModels.AppointViewModel>
+
+@{
+    ViewBag.Title = "Appointments";
+}
+
+<h2>Appointments</h2>
+
+<table class="table table-hover">
+    <tr>
+        <th style="text-align:center !important;">
+            Task
+        </th>
+        <th style="text-align:center !important;">
+            Appointed resources
+        </th>
+        <th style="text-align:center !important;">
+            Other available resources
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <colgroup>
+            <col style="width: 25%" />
+            <col style="width: 40%" />
+            <col style="width: 30%" />
+            <col style="width: 5%" />
+        </colgroup>
+        <tr>
+            <td>
+                <h6><b>Name:</b>@Html.DisplayFor(modelItem => item.Task.Name)</h6>
+                <h6><b>Period:</b>@item.Task.StartDate.ToString("dd MMMM yyyy") - @item.Task.EndDate.ToString("dd MMMM yyyy")</h6>
+            </td>
+            <td>
+                @foreach (var appointedRes in item.Resources)
+                {
+                    <div class="row" style="font-size:12px;">
+                        <div class="col-md-4">@appointedRes.Resource.FirstName @appointedRes.Resource.LastName</div>
+                        <div class="col-md-8">From <u>@appointedRes.DateFrom.ToString("MMMM dd, yyyy")</u> to <u>@appointedRes.DateTo.ToString("MMMM dd, yyyy")</u></div>
+                    </div>
+                }
+            </td>
+            <td style="font-size: 12px;">
+                @foreach (var availableRes in item.AllResources) { 
+                    @availableRes.FirstName @availableRes.LastName
+                    var next = "";
+                    if (item.AllResources.Last().FirstName != availableRes.LastName) {
+                        next = ", ";
+                    }
+                    @next
+                }
+            </td>
+            <td>
+                <button type="button" class="btn btn-success btn-xs" onclick="location.href='@Url.Action("Generated", "Tasks", new { id = item.Task.Id})'">
+                    <span class="glyphicon glyphicon-align-left" style="vertical-align:middle;margin-top: -5px"></span>&nbsp;Gantt
+                </button>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,84 @@
+﻿@model Gantt.Web.Models.ViewModels.AppointViewModel
+@using Gantt.Web.Models.ViewModels
+
+<div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+            @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><b>@Model.Task.Name</b></h4>
+                <h5>@Model.Task.StartDate.ToString("yyyy MMM dd") - @Model.Task.EndDate.ToString("yyyy MMM dd")</h5>
+            </div>
+            <div class="modal-body" id="modalWrapper">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-4">
+                        <b><span style="align-self:center">Name</span></b>
+                    </div>
+                    <div class="col-md-3">
+                        <b><span style="align-self:center">From</span></b>
+                    </div>
+                    <div class="col-md-3">
+                        <b><span style="align-self:center">To</span></b>
+                    </div>
+                </div>
+                @foreach (var item in Model.Resources)
+                {
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <label class="switch">
+                                    <input type="checkbox" name="participating" checked="checked" value="@item.Resource.Id">
+                                    <div class="slider round"></div>
+                                </label>
+                            </div>
+                            <div class="col-md-3">
+                                @item.Resource.FirstName @item.Resource.LastName
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => item.DateFrom, new { htmlAttributes = new { @class = "form-control", @id= (item.Resource.Id + " _start") } })
+                                @Html.ValidationMessageFor(model => item.DateFrom, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => item.DateTo, new { htmlAttributes = new { @class = "form-control", @id = (item.Resource.Id + " _end") } })
+                                @Html.ValidationMessageFor(model => item.DateTo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                }
+                <hr />
+                @foreach (var item in Model.AllResources)
+                {
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-1">
+                                <label class="switch">
+                                    <input type="checkbox" name="participating" value="@item.Id">
+                                    <div class="slider round"></div>
+                                </label>
+                            </div>
+                            <div class="col-md-3">
+                                @item.FirstName @item.LastName
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="startDate" id="@item.Id _start" type="date" value="@Model.Task.StartDate.ToString("yyyy-MM-dd")" />
+                            </div>
+                            <div class="col-sm-4">
+                                <input class="form-control" name="endDate" id="@item.Id _end" type="date" value="@Model.Task.EndDate.ToString("yyyy-MM-dd")" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="id">
+                <button @*type="submit"*@ onclick="generate(@Model.Task.Id)" class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk" style="vertical-align:middle;margin-top: -5px"></span> Generate</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+    </div>
+</div>
+
+<script>
+
+</script>

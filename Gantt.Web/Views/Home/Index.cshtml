@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>Gantt</h1>
+    <p class="lead">This is the web application made for interview at BePro. 
+    You can apply the CRUD operations on Tasks, Human Resources, as well
+    as appoint available human resources to tasks.</p>
+</div>
+
+<div class="row" style="text-align:justify">
+    <div class="col-md-4">
+        <h2>Data Access Layer</h2>
+        <p>
+            On the DAL there are two options which can be easily switched in between currently:
+            <ul>
+                <li><b>IRepository</b> pattern, which is available but not used. (<i>/DAL/Repositories</i>)</li>
+                <li><b>GenericRepository + UnitOfWork</b> pattern, which is currently used in the project (<i>/DAL</i>)</li>
+            </ul>
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Tasks")">Tasks &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>SPA imitation</h2>
+        <p>It was used <code>#DeleteModal</code> for delete confirmation, which is a single built in modal, 
+        also I use <code>#modalWrapper</code>, in which the _Create and _Edit partial views will be fetched.
+        This leaves a feeling of using the single page, application. Though, it isn't.
+        Moreover, there are Create and Edit separate views, in case if <code>ModelState.IsValid()</code> check
+    is not successful - incorrect view model will be sent to those views, which are separate pages.
+</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Resources")">Resources &raquo;</a></p>
+    </div>
+    <div class="col-md-4" >
+        <h2>Web Hosting</h2>
+        <p>The project is hosted here since March 8, 2017 and available during the next two months. The source code the project can be found here</p>
+        Also, CodeFirst migrations are available, in order for you not to have troubles of creating the DB tables, if you want to test the proejct locally.
+        The migrations with DB structure and Seed (test data) are available to be executed on the startup, all you have to do is create the DB and change the connectionString.
+        <p><a class="btn btn-default" href="https://github.com/rafatdin/gantt">GitHub &raquo;</a></p>
+    </div>
+</div>

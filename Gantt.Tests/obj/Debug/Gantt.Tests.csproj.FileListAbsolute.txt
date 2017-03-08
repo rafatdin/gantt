@@ -1,0 +1,1 @@
+e:\documents\visual studio 2015\Projects\Gantt\Gantt.Tests\obj\Debug\Gantt.Tests.csprojResolveAssemblyReference.cache

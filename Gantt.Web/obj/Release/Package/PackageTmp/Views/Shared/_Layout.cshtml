@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <style>
+        .switch {
+            top: 2px;
+            position: relative;
+            display: inline-block;
+            width: 30px;
+            height: 17px;
+        }
+
+            .switch input {
+                display: none;
+            }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+            .slider:before {
+                position: absolute;
+                content: "";
+                height: 10px;
+                width: 10px;
+                left: 4px;
+                bottom: 4px;
+                background-color: white;
+                -webkit-transition: .4s;
+                transition: .4s;
+            }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(13px);
+            -ms-transform: translateX(13px);
+            transform: translateX(13px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+            .slider.round:before {
+                border-radius: 50%;
+            }
+
+
+        .form-control-ovverriden {
+            display: block;
+            width: 100%;
+            height: 28px;
+            padding: 3px;
+            font-size: 13px;
+            line-height: 1;
+            color: #555555;
+            vertical-align: middle;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+        }
+
+/* Absolute Center Spinner */
+.loading {
+  position: fixed;
+  z-index: 999;
+  height: 2em;
+  width: 2em;
+  overflow: show;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/* Transparent Overlay */
+.loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+}
+
+/* :not(:required) hides these rules from IE9 and below */
+.loading:not(:required) {
+  /* hide "loading..." text */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.loading:not(:required):after {
+  content: '';
+  display: block;
+  font-size: 10px;
+  width: 1em;
+  height: 1em;
+  margin-top: -0.5em;
+  -webkit-animation: spinner 1500ms infinite linear;
+  -moz-animation: spinner 1500ms infinite linear;
+  -ms-animation: spinner 1500ms infinite linear;
+  -o-animation: spinner 1500ms infinite linear;
+  animation: spinner 1500ms infinite linear;
+  border-radius: 0.5em;
+  -webkit-box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.5) -1.5em 0 0 0, rgba(0, 0, 0, 0.5) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+  box-shadow: rgba(0, 0, 0, 0.75) 1.5em 0 0 0, rgba(0, 0, 0, 0.75) 1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) 0 1.5em 0 0, rgba(0, 0, 0, 0.75) -1.1em 1.1em 0 0, rgba(0, 0, 0, 0.75) -1.5em 0 0 0, rgba(0, 0, 0, 0.75) -1.1em -1.1em 0 0, rgba(0, 0, 0, 0.75) 0 -1.5em 0 0, rgba(0, 0, 0, 0.75) 1.1em -1.1em 0 0;
+}
+
+/* Animation */
+
+@@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@@-moz-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@@-o-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@@keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Resource planning system", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="@Url.Action("Index", "Resources")">
+                            <span class="glyphicon glyphicon-user" style="vertical-align:middle;margin-top: -5px" aria-hidden="true"></span> Resources
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "Tasks")">
+                            <span class="glyphicon glyphicon-tasks" style="vertical-align:middle;margin-top: -5px" aria-hidden="true"></span> Tasks
+                        </a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Appointments", "Tasks")">
+                            <span class="glyphicon glyphicon-hand-up" style="vertical-align:middle;margin-top: -5px" aria-hidden="true"></span> Appointments
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        <div class="loading" style="display:none" id="loader">
+        </div>
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @RenderSection("scripts", required: false)
+
+    @*
+        I use #DeleteModal for delete confirmation, which is a single built in modal,
+        also I use #modalWrapper, in which the _Create and _Edit partial views will be fetched.
+        This leaves a feeling of using the single page, application. Though, it isn't.
+        Moreover, there are Create and Edit separate views, in case if ModelState.IsValid() check
+        is not successful - incorrect view model will be sent to those views, which are separate pages.
+    *@
+
+    <!-------------------------------------------modals start-------------------------------------------------------->
+    <div id="DeleteModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirm Delete</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to delete <span id="itemName"></span> <b id="itemIdentifier"></b> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <form action="/Items/Delete" method="post" id="deleteForm">
+                        <input type="hidden" id="deleteId" name="id" value="" />
+                        <button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash" style="vertical-align:middle;margin-top: -5px"></span> Delete</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalWrapper" role="dialog"></div>
+    <!-------------------------------------------modals end-------------------------------------------------------->
+
+    
+
+    <script>
+        $(document).ready(function () {
+            $('#DeleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);                //Button which is clicked
+                var clickedButtonId = button.data('id');            //Get id of the record
+                var itemIdentifier = button.data('identifier')      //Get data of the record (in this case name)
+                var itemName = button.data('item')                  //Get type of the record (type of the item: Task, Resource, Appointment)
+
+                fixFormAction(itemName);                            //Within the #DeleteModal set correct form action path
+
+                // set modal hidden input and values
+                $("#itemName").text(itemName);
+                $("#itemIdentifier").text(itemIdentifier);
+                $("#deleteId").val(clickedButtonId);
+            });
+        })
+
+        function fixFormAction(type) {
+            form = $('#deleteForm');
+            if (type == 'task') {
+                form.attr('action', '/Tasks/Delete');
+            }
+            if (type == 'resource') {
+                form.attr('action', '/Resources/Delete');
+            }
+            if (type == 'appointment') {
+                form.attr('action', '/Appoints/Delete');
+            }
+        }
+
+        function edit(element) {
+            var reqUrl = $(element).data('url') + '/';
+            var id = $(element).data('id');
+            $('#loader').show();                            //load the loading image
+            $.ajax({
+                type: "get",
+                url: reqUrl + id,
+                cache: false,
+                success: function (data) {
+                    $('#modalWrapper').html(data);
+                    $('#modalWrapper').modal('show');
+                    $('#loader').hide();                      //hide the loading image
+                }
+            })
+        }
+
+        function create(element) {
+            var url = $(element).data('url');
+            $.get(url, function (data) {
+                $('#modalWrapper').html(data);
+                $('#modalWrapper').modal('show');
+            })
+        }
+
+        function generate(taskId) {
+            var list = [];
+            $('input[type=checkbox]').each(function () {
+                var id = $(this).val();
+                var rit = {
+                    "status": (this.checked ? true : false),
+                    "task_id": taskId,
+                    "resource_id": id,
+                    "start_date": $("input[id='" + id + " _start']").val(),
+                    "end_date": $("input[id='" + id + " _end']").val(),
+                }
+                list.push(rit);
+            })
+            $.ajax({
+                url: '@Url.Action("Generate", "Tasks")',
+                type: "POST",
+                data: JSON.stringify(list),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                error: function (response) {
+                    alert(response.responseText);
+                },
+                success: function (response) {
+                    //$("body").html(response);
+                    //window.open(response);
+                    window.location.href = response;
+                    return false;
+                }
+            })
+        }
+    </script>
+</body>
+</html>

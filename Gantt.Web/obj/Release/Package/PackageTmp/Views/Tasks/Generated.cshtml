@@ -1,0 +1,72 @@
+﻿@model int
+@{
+    ViewBag.Title = "Gantt";
+}
+
+<h2>Gantt Chart</h2>
+
+<h4>@ViewBag.TaskName</h4>
+
+<div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+
+<div>
+    <a href="@Url.Action("Appointments", "Tasks")" class="btn btn-default btn-sm ">
+        <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> &nbsp;Appointments
+    </a>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Generated", "Tasks")',
+            data: {'id' : @Model, 'json' : true },
+            dataType: 'json',
+            success: function (data) {
+                ganttInitiate(data);
+            },
+            error: function (data) {
+                alert(data);
+            }
+        });
+    })
+
+    function ganttInitiate(items){
+        var g = new JSGantt.GanttChart(document.getElementById('GanttChartDIV'), 'month');
+        g.setShowRes(1); // Show/Hide Responsible (0/1)
+        g.setShowDur(1); // Show/Hide Duration (0/1)
+        g.setUseToolTip(1); //Controls the display of tool tip boxes
+        g.setShowComp(0); // Show/Hide % Complete(0/1)
+        g.setShowTaskInfoNotes(0); //Controls whether the Additional Notes data is displayed in the task tool tip
+        g.setShowDeps(0); //Controls display of dependancy lines
+        //g.setCaptionType('Resource');  // Set to Show Caption (None,Caption,Resource,Duration,Complete)
+        //g.setShowStartDate(1); // Show/Hide Start Date(0/1)
+        //g.setShowEndDate(1); // Show/Hide End Date(0/1)
+        //g.setDateInputFormat('yyyy-mm-dd')  // Set format of input dates ('mm/dd/yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd')
+        //g.setDateDisplayFormat('mm/dd/yyyy') // Set format to display dates ('mm/dd/yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd')
+        
+        //g.AddTaskItem(new JSGantt.TaskItem(0, 'Gantt Project','',          '',          'ggroupblack','', 0, 'Brian', 0,  1,0,1,'','','Some Notes text',g));
+        $(items).each(function(index, data){
+            g.AddTaskItem(new JSGantt.TaskItem(
+                data.pID, 
+                data.pName, 
+                data.pStart, 
+                data.pEnd, 
+                'ggroupblack','','',
+                data.pRes,
+                data.pComp,'',
+                data.pParent, 
+                1, //Open
+                '','',
+                '', //Notes
+                g));
+        })  
+        
+        //g.AddTaskItem(new JSGantt.TaskItem(11,'Chart Object',    '2016-02-20','2016-02-20','gmilestone', '', 1, 'Shlomy',100,0,1,1,'','','',g));
+        g.Draw();
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

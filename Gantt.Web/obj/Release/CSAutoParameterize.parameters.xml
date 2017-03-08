@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="GanttContext-Web.config Connection String" description="GanttContext Connection String used in web.config by the application to access the database." defaultValue="Data Source=.\SQLEXPRESS;initial catalog=Gantt;integrated security=True;MultipleActiveResultSets=True" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GanttContext']/@connectionString" />
+  </parameter>
+  <parameter name="GanttContextEF-Web.config Connection String" description="GanttContextEF Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/DAL.DbDataModelEF.csdl|res://*/DAL.DbDataModelEF.ssdl|res://*/DAL.DbDataModelEF.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\SQLEXPRESS;initial catalog=Gantt;integrated security=True;multipleactiveresultsets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GanttContextEF']/@connectionString" />
+  </parameter>
+  <parameter name="GanttContext_DatabasePublish-Web.config Connection String" description="GanttContext_DatabasePublish Connection String used in web.config by the application to access the database." defaultValue="GanttContext_DatabasePublish.ConnetionString" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GanttContext_DatabasePublish']/@connectionString" />
+  </parameter>
+</parameters>

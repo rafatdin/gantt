@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="treefer-001-site1" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="GanttContext-Web.config Connection String" description="" value="Data Source=sql5034.mywindowshosting.com;Initial Catalog=DB_A19ADC_gantt;Persist Security Info=True;User ID=DB_A19ADC_gantt_admin;Password=Nokian_73" tags="">
+    <parameterEntry kind="XmlFile" scope="e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GanttContext']/@connectionString" />
+  </parameter>
+  <parameter name="GanttContextEF-Web.config Connection String" description="GanttContextEF Connection String used in web.config by the application to access the database." value="metadata=res://*/DAL.DbDataModelEF.csdl|res://*/DAL.DbDataModelEF.ssdl|res://*/DAL.DbDataModelEF.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=.\SQLEXPRESS;initial catalog=Gantt;integrated security=True;multipleactiveresultsets=True;App=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="e:\\documents\\visual\ studio\ 2015\\Projects\\Gantt\\Gantt\.Web\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='GanttContextEF']/@connectionString" />
+  </parameter>
+</parameters>
